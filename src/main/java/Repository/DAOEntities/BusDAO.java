@@ -1,4 +1,15 @@
 package Repository.DAOEntities;
 
-public class BusDAO {
+import Service.Entities.Bus;
+
+public class BusDAO extends BaseEntityDAO<Bus,Long> {
+    @Override
+    protected void setEntityClass() {
+        super.entityClass = Bus.class;
+    }
+
+    @Override
+    protected void setColumnName(String columnName) {
+        super.columnName = columnName;
+    }
 }
