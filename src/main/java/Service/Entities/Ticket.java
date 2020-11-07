@@ -1,5 +1,12 @@
 package Service.Entities;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
