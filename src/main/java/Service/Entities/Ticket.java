@@ -39,4 +39,59 @@ public class Ticket {
     @Generated(GenerationTime.ALWAYS)
     private Date ticketIssuanceTime;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public long getTicketNumber() {
+        return ticketNumber;
+    }
+
+    public void setTicketNumber(long ticketNumber) {
+        this.ticketNumber = ticketNumber;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Travel getTravel() {
+        return travel;
+    }
+
+    public void setTravel(Travel travel) {
+        this.travel = travel;
+    }
+
+    public Date getTicketIssuanceTime() {
+        return ticketIssuanceTime;
+    }
+
+    public void setTicketIssuanceTime(Date ticketIssuanceTime) {
+        this.ticketIssuanceTime = ticketIssuanceTime;
+    }
 }
