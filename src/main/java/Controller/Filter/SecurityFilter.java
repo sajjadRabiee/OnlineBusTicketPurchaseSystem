@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter("/dashboard")
+@WebFilter("/dashboard/*")
 public class SecurityFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -18,12 +18,13 @@ public class SecurityFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpReq = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResp = (HttpServletResponse) servletResponse;
-        HttpSession session = httpReq.getSession();
-        if(session.getAttribute("online_user")==null){
-            filterChain.doFilter(servletRequest,servletResponse);
+        HttpSession session = httpReq.getSession(false);
+        if(session==null || session.getAttribute("online_user")==null){
+            httpResp.sendRedirect(httpReq.getContextPath() + "/login.html");
         }else{
-            httpResp.sendRedirect("login.html");
+            filterChain.doFilter(httpReq,httpResp);
         }
+
     }
 
     @Override
