@@ -24,9 +24,11 @@ public class LoginServlet extends HttpServlet {
             User user = oUser.get();
             HttpSession httpSession = req.getSession();
             httpSession.setAttribute("online_user",user);
-            resp.sendRedirect("/dashboard");
+            resp.sendRedirect("/dashboard/user-page.html");
+            System.out.println(2);
         }else{
             resp.sendRedirect("login.html");
+            System.out.println(3);
         }
     }
 }
