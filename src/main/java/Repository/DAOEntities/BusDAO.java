@@ -4,12 +4,12 @@ import Service.Entities.Bus;
 
 public class BusDAO extends BaseEntityDAO<Bus,Long> {
     @Override
-    protected void setEntityClass() {
+    public void setEntityClass() {
         super.entityClass = Bus.class;
     }
 
     @Override
-    protected void setColumnName(String columnName) {
+    public void setColumnName(String columnName) {
         super.columnName = columnName;
     }
 }

@@ -4,12 +4,12 @@ import Service.Entities.Travel;
 
 public class TravelDAO extends BaseEntityDAO<Travel,Long> {
     @Override
-    protected void setEntityClass() {
+    public void setEntityClass() {
         super.entityClass = Travel.class;
     }
 
     @Override
-    protected void setColumnName(String columnName) {
+    public void setColumnName(String columnName) {
         super.columnName = columnName;
     }
 }

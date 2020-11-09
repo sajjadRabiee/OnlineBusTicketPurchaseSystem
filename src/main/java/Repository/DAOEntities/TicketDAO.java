@@ -4,12 +4,12 @@ import Service.Entities.Ticket;
 
 public class TicketDAO extends BaseEntityDAO<Ticket,Long>{
     @Override
-    protected void setEntityClass() {
+    public void setEntityClass() {
         super.entityClass = Ticket.class;
     }
 
     @Override
-    protected void setColumnName(String columnName) {
+    public void setColumnName(String columnName) {
         super.columnName = columnName;
     }
 }
