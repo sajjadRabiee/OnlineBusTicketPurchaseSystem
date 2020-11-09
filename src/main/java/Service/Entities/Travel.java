@@ -12,10 +12,10 @@ public class Travel {
     private long id;
 
     @Column
-    private String beginning;
+    private City beginning;
 
     @Column
-    private String destination;
+    private City destination;
 
     @Column
     private Date timeOfMovement;
@@ -36,19 +36,19 @@ public class Travel {
         this.id = id;
     }
 
-    public String getBeginning() {
+    public City getBeginning() {
         return beginning;
     }
 
-    public void setBeginning(String beginning) {
+    public void setBeginning(City beginning) {
         this.beginning = beginning;
     }
 
-    public String getDestination() {
+    public City getDestination() {
         return destination;
     }
 
-    public void setDestination(String destination) {
+    public void setDestination(City destination) {
         this.destination = destination;
     }
 
