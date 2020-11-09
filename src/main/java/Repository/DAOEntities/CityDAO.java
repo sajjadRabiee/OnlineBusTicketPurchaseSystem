@@ -4,12 +4,12 @@ import Service.Entities.City;
 
 public class CityDAO extends BaseEntityDAO<City,Long>{
     @Override
-    protected void setEntityClass() {
+    public void setEntityClass() {
         super.entityClass = City.class;
     }
 
     @Override
-    protected void setColumnName(String columnName) {
+    public void setColumnName(String columnName) {
         super.columnName = columnName;
     }
 }
