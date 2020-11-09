@@ -47,4 +47,20 @@ public class UserService implements BaseEntityService<User> {
     public boolean update(User user) {
         return userDAO.update(user);
     }
+
+    public Optional<User> loginUser(String username , String password){
+        User user;
+        Optional<User> nullUser = Optional.ofNullable(null);
+        Optional<User> userByName = findByName(username, "name");
+        if(userByName.isPresent()){
+            user = userByName.get();
+            if(user.getPassword().equals(password)){
+                return userByName;
+            }else{
+                return nullUser;
+            }
+        }else{
+            return nullUser;
+        }
+    }
 }
