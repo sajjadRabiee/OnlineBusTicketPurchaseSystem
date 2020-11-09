@@ -10,6 +10,9 @@ public class Bus {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column
+    private int valency;
+
     @ManyToMany(mappedBy = "buses")
     private List<Travel> travels = new ArrayList<>();
 
@@ -19,6 +22,14 @@ public class Bus {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public int getValency() {
+        return valency;
+    }
+
+    public void setValency(int valency) {
+        this.valency = valency;
     }
 
     public List<Travel> getTravels() {
