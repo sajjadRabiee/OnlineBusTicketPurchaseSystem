@@ -1,38 +1,51 @@
 package Service;
 
+import Repository.DAOEntities.BusDAO;
 import Service.Entities.Bus;
 
 import java.util.List;
 import java.util.Optional;
 
 public class BusService implements BaseEntityService<Bus> {
-    @Override
-    public Optional<Bus> findById() {
-        return Optional.empty();
+
+    BusDAO busDAO = new BusDAO();
+
+    public BusService(){
+        busDAO.setEntityClass();
     }
 
     @Override
-    public Optional<Bus> findByName() {
-        return Optional.empty();
+    public Optional<Bus> findById(long id) {
+        Optional<Bus> byID = busDAO.findByID(id);
+        return byID;
+    }
+
+    @Override
+    public Optional<Bus> findByName(String name , String column) {
+        busDAO.setColumnName(column);
+        Optional<Bus> byName = busDAO.findByName(name);
+        return byName;
+
     }
 
     @Override
     public List<Bus> findAll() {
-        return null;
+        List<Bus> all = busDAO.findAll();
+        return all;
     }
 
     @Override
-    public boolean add() {
-        return false;
+    public boolean add(Bus bus) {
+        return busDAO.add(bus);
     }
 
     @Override
-    public boolean delete() {
-        return false;
+    public boolean delete(Bus bus) {
+        return busDAO.delete(bus);
     }
 
     @Override
-    public boolean update() {
-        return false;
+    public boolean update(Bus bus) {
+        return busDAO.update(bus);
     }
 }
