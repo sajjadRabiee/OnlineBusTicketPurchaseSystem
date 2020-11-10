@@ -1,8 +1,11 @@
 package Service;
 
 import Repository.DAOEntities.TravelDAO;
+import Service.Entities.Bus;
 import Service.Entities.Travel;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,5 +49,20 @@ public class TravelService implements BaseEntityService<Travel> {
     @Override
     public boolean update(Travel travel) {
         return travelDAO.update(travel);
+    }
+
+    public boolean addTravel(String beginning , String destination , String[] busesName, Date time){
+        Travel travel = new Travel();
+        travel.setBeginning(beginning);
+        travel.setDestination(destination);
+        ArrayList<Bus> busesList = new ArrayList<>();
+        BusService busService = new BusService();
+        for(String bName : busesName){
+            Bus bus = busService.findById(Long.parseLong(bName)).get();
+            busesList.add(bus);
+        }
+        travel.setBuses(busesList);
+        travel.setTimeOfMovement(time);
+        return add(travel);
     }
 }
