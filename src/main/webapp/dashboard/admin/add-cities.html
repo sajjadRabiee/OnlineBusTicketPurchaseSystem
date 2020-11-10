@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>Add cities</title>
+</head>
+<body>
+<form action="" method="post">
+    <label for="name">نام شهر : </label>
+    <input type="text" name="name" id="name">
+    <input type="submit" value="اضافه کردن شهر">
+    <p id="add" style="text-align: center; margin-bottom: 0; margin-top: 10px; padding: 10px; border-style: dashed; border-color:red; display:none">شهر شما به درستی افزوده شد</p>
+    <p id="not-add" style="text-align: center; margin-bottom: 0; margin-top: 10px; padding: 10px; border-style: dashed; border-color:red; display:none">شهر متاسفانه افزوده نشد !</p>
+    <script>
+        var searchIndex1 = window.location.href.indexOf("true");
+        var searchIndex2 = window.location.href.indexOf("false");
+        if(searchIndex1 > -1){
+            document.getElementById('add').style.display='block';
+        }else if(searchIndex2 > -1){
+            document.getElementById('not-add').style.display='block';
+        }
+    </script>
+</form>
+</body>
+</html>
