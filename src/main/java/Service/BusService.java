@@ -48,4 +48,11 @@ public class BusService implements BaseEntityService<Bus> {
     public boolean update(Bus bus) {
         return busDAO.update(bus);
     }
+
+    public boolean addBus(int busNumber,int valency){
+        Bus bus = new Bus();
+        bus.setBusNumber(busNumber);
+        bus.setValency(valency);
+        return add(bus);
+    }
 }
