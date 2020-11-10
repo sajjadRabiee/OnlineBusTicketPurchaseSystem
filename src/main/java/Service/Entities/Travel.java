@@ -20,6 +20,10 @@ public class Travel {
     @Column
     private Date timeOfMovement;
 
+    @Column
+    private Date dateOfMovement;
+
+
     @ManyToMany
     @JoinTable(
             name = "travels_buses",
@@ -66,5 +70,13 @@ public class Travel {
 
     public void setBuses(List<Bus> buses) {
         this.buses = buses;
+    }
+
+    public Date getDateOfMovement() {
+        return dateOfMovement;
+    }
+
+    public void setDateOfMovement(Date dateOfMovement) {
+        this.dateOfMovement = dateOfMovement;
     }
 }
