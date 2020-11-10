@@ -1,5 +1,6 @@
 package Controller.Servlet.UserServlet;
 
+import Controller.WrapFarsi;
 import Service.Entities.Gender;
 import Service.Entities.Role;
 import Service.UserService;
@@ -15,7 +16,7 @@ import java.io.IOException;
 public class RegisterUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
+        String name = WrapFarsi.getFarsiString(req,"name");
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String gender = req.getParameter("gender");
@@ -29,6 +30,6 @@ public class RegisterUserServlet extends HttpServlet {
         }
         UserService userService = new UserService();
         userService.registerUser(name,username,password,genderOfUser, Role.User);
-        resp.sendRedirect("login.html");
+        resp.sendRedirect("/main-pages/login.html");
     }
 }
