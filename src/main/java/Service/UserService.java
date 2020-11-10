@@ -67,7 +67,7 @@ public class UserService implements BaseEntityService<User> {
     public Optional<User> loginUser(String username , String password){
         User user;
         Optional<User> nullUser = Optional.ofNullable(null);
-        Optional<User> userByName = findByName(username, "name");
+        Optional<User> userByName = findByName(username, "username");
         if(userByName.isPresent()){
             user = userByName.get();
             if(user.getPassword().equals(password)){
