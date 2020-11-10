@@ -22,6 +22,9 @@ public class User {
     @Column
     private Gender gender;
 
+    @Column
+    private Role role;
+
     @OneToMany(mappedBy = "user")
     private List<Ticket> tickets = new ArrayList<>();
 
@@ -71,5 +74,13 @@ public class User {
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
