@@ -19,7 +19,7 @@ public class AddBusServlet extends HttpServlet {
         if(busService.addBus(busNumber,valency)){
             resp.sendRedirect("/dashboard/admin/add-bus.html?true");
         }else{
-            resp.sendRedirect("/dashboard/admin/add-bus.html?true");
+            resp.sendRedirect("/dashboard/admin/add-bus.html?false");
         }
     }
 }
