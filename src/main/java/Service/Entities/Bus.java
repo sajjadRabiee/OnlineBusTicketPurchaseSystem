@@ -11,6 +11,9 @@ public class Bus {
     private long id;
 
     @Column
+    private int busNumber;
+
+    @Column
     private int valency;
 
     @ManyToMany(mappedBy = "buses")
@@ -22,6 +25,14 @@ public class Bus {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public int getBusNumber() {
+        return busNumber;
+    }
+
+    public void setBusNumber(int busNumber) {
+        this.busNumber = busNumber;
     }
 
     public int getValency() {
