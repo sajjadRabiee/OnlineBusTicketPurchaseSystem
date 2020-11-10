@@ -1,6 +1,8 @@
 package Service;
 
 import Repository.DAOEntities.UserDAO;
+import Service.Entities.Gender;
+import Service.Entities.Role;
 import Service.Entities.User;
 
 import java.util.List;
@@ -46,6 +48,20 @@ public class UserService implements BaseEntityService<User> {
     @Override
     public boolean update(User user) {
         return userDAO.update(user);
+    }
+
+    public Optional<User> registerUser(String name , String username , String password , Gender gender , Role role){
+        User user = new User();
+        user.setName(name);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setGender(gender);
+        user.setRole(role);
+        if(add(user)){
+            return Optional.of(user);
+        }else{
+            return Optional.ofNullable(null);
+        }
     }
 
     public Optional<User> loginUser(String username , String password){
