@@ -1,5 +1,6 @@
-package Controller.Servlet;
+package Controller.Servlet.UserServlet;
 
+import Service.Entities.Role;
 import Service.Entities.User;
 import Service.UserService;
 
@@ -18,17 +19,12 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        UserService userService = new UserService();
-        Optional<User> oUser = userService.loginUser(username, password);
-        if(oUser.isPresent()){
-            User user = oUser.get();
-            HttpSession httpSession = req.getSession();
-            httpSession.setAttribute("online_user",user);
-            resp.sendRedirect("/dashboard/user-page.html");
-            System.out.println(2);
+        HttpSession httpSession = req.getSession();
+        User user = (User) httpSession.getAttribute("online_user");
+        if(user.getRole().equals(Role.User)){
+            resp.sendRedirect("/dashboard/user/user-page.html");
         }else{
-            resp.sendRedirect("login.html");
-            System.out.println(3);
+            resp.sendRedirect("/dashboard/admin/admin-page.html");
         }
     }
 }
