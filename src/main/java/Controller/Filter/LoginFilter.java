@@ -30,9 +30,9 @@ public class LoginFilter implements Filter {
             User user = oUser.get();
             HttpSession httpSession = req.getSession();
             httpSession.setAttribute("online_user",user);
-            resp.sendRedirect("/login");
+            filterChain.doFilter(req,resp);
         }else{
-            resp.sendRedirect("login.html");
+            resp.sendRedirect("/main-pages/login.html");
         }
     }
 
