@@ -46,4 +46,10 @@ public class CityService implements BaseEntityService<City>{
     public boolean update(City city) {
         return cityDAO.update(city);
     }
+
+    public boolean addCity(String name){
+        City city = new City();
+        city.setName(name);
+        return add(city);
+    }
 }
