@@ -20,7 +20,7 @@ public class SecurityFilter implements Filter {
         HttpServletResponse httpResp = (HttpServletResponse) servletResponse;
         HttpSession session = httpReq.getSession(false);
         if(session==null || session.getAttribute("online_user")==null){
-            httpResp.sendRedirect(httpReq.getContextPath() + "/login.html");
+            httpResp.sendRedirect(httpReq.getContextPath() + "/main-pages/login.html");
         }else{
             filterChain.doFilter(httpReq,httpResp);
         }
