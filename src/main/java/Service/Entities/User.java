@@ -25,7 +25,7 @@ public class User {
     @Column
     private Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user" , fetch = FetchType.LAZY)
     private List<Ticket> tickets = new ArrayList<>();
 
     public long getId() {
