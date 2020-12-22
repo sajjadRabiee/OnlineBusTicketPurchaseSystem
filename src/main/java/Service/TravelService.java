@@ -4,6 +4,8 @@ import Repository.DAOEntities.TravelDAO;
 import Service.Entities.Bus;
 import Service.Entities.Travel;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,10 +53,11 @@ public class TravelService implements BaseEntityService<Travel> {
         return travelDAO.update(travel);
     }
 
-    public boolean addTravel(String beginning , String destination , String[] busesName, Date time){
+    public boolean addTravel(String beginning , String destination , String[] busesName, Date date, LocalTime time){
         Travel travel = new Travel();
         travel.setBeginning(beginning);
         travel.setDestination(destination);
+        travel.setTravelNumber(findAll().size() + 2000);
         ArrayList<Bus> busesList = new ArrayList<>();
         BusService busService = new BusService();
         for(String bName : busesName){
@@ -62,7 +65,13 @@ public class TravelService implements BaseEntityService<Travel> {
             busesList.add(bus);
         }
         travel.setBuses(busesList);
+        travel.setDateOfMovement(date);
         travel.setTimeOfMovement(time);
         return add(travel);
+    }
+
+    public List<Travel> findTravels(String beginning , String destination,Date date){
+        List<Travel> travelByProperty = travelDAO.findTravelByProperty(beginning, destination, date);
+        return travelByProperty;
     }
 }

@@ -1,6 +1,8 @@
 package Service.Entities;
 
 import javax.persistence.*;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,11 +20,13 @@ public class Travel {
     private String destination;
 
     @Column
-    private Date timeOfMovement;
+    private LocalTime timeOfMovement;
 
     @Column
     private Date dateOfMovement;
 
+    @Column(name = "travel_number" , nullable = false , updatable = false , unique = true)
+    private long travelNumber;
 
     @ManyToMany
     @JoinTable(
@@ -56,11 +60,11 @@ public class Travel {
         this.destination = destination;
     }
 
-    public Date getTimeOfMovement() {
+    public LocalTime getTimeOfMovement() {
         return timeOfMovement;
     }
 
-    public void setTimeOfMovement(Date timeOfMovement) {
+    public void setTimeOfMovement(LocalTime timeOfMovement) {
         this.timeOfMovement = timeOfMovement;
     }
 
@@ -78,5 +82,13 @@ public class Travel {
 
     public void setDateOfMovement(Date dateOfMovement) {
         this.dateOfMovement = dateOfMovement;
+    }
+
+    public long getTravelNumber() {
+        return travelNumber;
+    }
+
+    public void setTravelNumber(long travelNumber) {
+        this.travelNumber = travelNumber;
     }
 }

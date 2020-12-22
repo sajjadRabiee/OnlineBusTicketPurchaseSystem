@@ -1,8 +1,12 @@
 package Service;
 
 import Repository.DAOEntities.TicketDAO;
+import Service.Entities.Gender;
 import Service.Entities.Ticket;
+import Service.Entities.Travel;
+import Service.Entities.User;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,5 +50,25 @@ public class TicketService implements BaseEntityService<Ticket> {
     @Override
     public boolean update(Ticket ticket) {
         return ticketDAO.update(ticket);
+    }
+
+    public boolean addTicket(User user, long travelId, String name , Gender gender){
+        Ticket ticket = new Ticket();
+        ticket.setName(name);
+        ticket.setGender(gender);
+        ticket.setTicketIssuanceTime(new Date());
+        ticket.setTicketNumber(2500 + user.getId() + findAll().size());
+        TravelService travelService = new TravelService();
+        Optional<Travel> travel = travelService.findById(travelId);
+        ticket.setTravel(travel.get());
+        ticket.setUser(user);
+        boolean add = add(ticket);
+        UserService userService = new UserService();
+        userService.update(user);
+        return add;
+    }
+
+    public List<Ticket> findTicketsOfUser(User user){
+        return ticketDAO.findTicketesOfUser(user);
     }
 }

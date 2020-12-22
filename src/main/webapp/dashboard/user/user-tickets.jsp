@@ -1,13 +1,28 @@
-<!DOCTYPE html>
+<%@ page import="Service.TicketService" %>
+<%@ page import="Service.Entities.User" %>
+<%@ page import="Service.Entities.Ticket" %>
+<%@ page import="java.util.List" %><%--
+  Created by IntelliJ IDEA.
+  User: Faezeh
+  Date: 11/11/2020
+  Time: 10:50 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html dir="rtl" lang="fa">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
           integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
-    <title>Add cities</title>
+    <title>User Tickets</title>
 </head>
 <body class="container-fluid bg-light">
-
+<%
+    User online_user = (User) session.getAttribute("online_user");
+    TicketService ticketService = new TicketService();
+    List<Ticket> ticketsOfUser = ticketService.findTicketsOfUser(online_user);
+%>
 <div class="row position-static">
     <div class="col-12" style="padding: 0">
         <nav class="navbar navbar-expand-lg navbar-light bg-primary">
@@ -18,10 +33,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link text-white" href="admin-page.html">منوی مدیریت</a>
-                    <a class="nav-item nav-link text-white" href="add-cities.html">افزودن شهر</a>
-                    <a class="nav-item nav-link text-white" href="add-bus.html">افزودن اتوبوس</a>
-                    <a class="nav-item nav-link text-white" href="add-travel.jsp">افزودن سفر</a>
+                    <a class="nav-item nav-link text-white" href="user-page.html">منوی کاربری</a>
+
+                    <a class="nav-item nav-link text-white" href="user-tickets.jsp">مشاهده بلیط های من</a>
+                    <a class="nav-item nav-link text-white" href="../../main-pages/search-ticket.jsp">رزرو بلیت</a>
                 </div>
             </div>
             <form class="form-inline" action="/logout" method="get">
@@ -30,33 +45,45 @@
         </nav>
     </div>
 </div>
-<div class="row justify-content-center p-4">
-    <div class="col-8">
-        <h2>اضافه کردن شهر به سیستم</h2>
-    </div>
-</div>
 <div class="row justify-content-center">
-    <div class="col-8 border p-4 m-4">
-        <form action="/add-city" method="post">
-            <div class="form-group"><label for="name">نام شهر : </label>
-                <input class="form-control" type="text" name="name" id="name"></div>
-            <input class="btn btn-dark" type="submit" value="اضافه کردن شهر">
-        </form>
+    <div class="col-12 p-4 m-4">
+        <table class="table">
+            <thead>
+            <td colspan="3">لیست بلیت های خریداری شده</td>
+            </thead>
+            <tr class="table-primary">
+                <td>انتخاب</td>
+                <td>شناسه بلیط</td>
+                <td>تاریخ</td>
+            </tr>
+            <%for(Ticket t : ticketsOfUser){%>
+            <tr>
+                <td>
+                    <form action="show-ticket-information.jsp" method="post">
+                        <input type="hidden" name="ticket-id" value="<%=t.getId()%>">
+                        <input class="btn btn-primary" type="submit" value="مشاهده بلیط">
+                    </form>
+                </td>
+                <td><%=t.getTicketNumber()%></td>
+                <td><%=t.getTravel().getDateOfMovement()%></td>
+
+            </tr>
+            <%}%>
+        </table>
         <div id="not-add" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none">
-            <strong>متاسفیم!  </strong> شهر متاسفانه افزوده نشد !
+            <strong>متاسفیم!</strong>  مشکلی پیش آمد دوباره تلاش کنید !
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div id="add" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none">
-            <strong>  ایول!</strong>شهر شما به درستی افزوده شد
+            <strong>ایول!</strong>به درستی بلیت مورد نظر حذف شد
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     </div>
 </div>
-
 
 <div class="row bg-secondary justify-content-between align-items-center" style="height: 65px">
     <div class="col-4 text-center">this is a fullstack project</div>
@@ -67,17 +94,15 @@
     </div>
     <div class="col-4 text-center">nov 2020</div>
 </div>
-
 <script>
     var searchIndex1 = window.location.href.indexOf("true");
     var searchIndex2 = window.location.href.indexOf("false");
-    if (searchIndex1 > -1) {
-        document.getElementById('add').style.display = 'block';
-    } else if (searchIndex2 > -1) {
-        document.getElementById('not-add').style.display = 'block';
+    if(searchIndex1 > -1){
+        document.getElementById('add').style.display='block';
+    }else if(searchIndex2 > -1){
+        document.getElementById('not-add').style.display='block';
     }
 </script>
-</form>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

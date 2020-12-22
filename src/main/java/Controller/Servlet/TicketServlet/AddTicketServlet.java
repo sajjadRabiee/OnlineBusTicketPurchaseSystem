@@ -1,25 +1,23 @@
-package Controller.Servlet.UserServlet;
+package Controller.Servlet.TicketServlet;
 
 import Controller.WrapFarsi;
 import Service.Entities.Gender;
-import Service.Entities.Role;
-import Service.UserService;
+import Service.Entities.User;
+import Service.TicketService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
-@WebServlet("/register")
-public class RegisterUserServlet extends HttpServlet {
+@WebServlet("/add-ticket")
+public class AddTicketServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WrapFarsi wrapFarsi = new WrapFarsi();
         String name = wrapFarsi.getFarsiString(req,"name");
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
         String gender = req.getParameter("gender");
         Gender genderOfUser = null;
         if(gender.equals("male")){
@@ -29,8 +27,15 @@ public class RegisterUserServlet extends HttpServlet {
         }else if(gender.equals("other")){
             genderOfUser = Gender.other;
         }
-        UserService userService = new UserService();
-        userService.registerUser(name,username,password,genderOfUser, Role.User);
-        resp.sendRedirect("/main-pages/login.html");
+        HttpSession session = req.getSession();
+        Long ticketId = Long.parseLong((String) session.getAttribute("ticket-id"));
+        User online_user = (User) session.getAttribute("online_user");
+        TicketService ticketService = new TicketService();
+        boolean bool = ticketService.addTicket(online_user, ticketId, name, genderOfUser);
+        if(bool){
+            resp.sendRedirect("/dashboard/user/add-ticket.jsp?true");
+        }else{
+            resp.sendRedirect("/dashboard/user/add-ticket.jsp?false");
+        }
     }
 }

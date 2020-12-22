@@ -5,7 +5,6 @@ import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import java.util.Date;
-
 @Entity
 public class Ticket {
     @Id
@@ -18,13 +17,8 @@ public class Ticket {
     @Column
     private Gender gender;
 
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "ticket_number_generator")
-    @SequenceGenerator(
-            name="ticket_number_generator",
-            sequenceName = "ticket_number_seq")
-    @Column(name = "ticket_number")
+
+    @Column(name = "ticket_number" , nullable = false , updatable = false , unique = true)
     private long ticketNumber;
 
     @ManyToOne

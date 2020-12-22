@@ -2,26 +2,92 @@
 <html dir="rtl" lang="fa">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
+          integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
     <title>add bus</title>
 </head>
-<body>
-<form action="/add-bus" method="get">
-    <label for="bus-number">شماره اتوبوس : </label>
-    <input type="text" name="bus-number" id="bus-number">
-    <label for="valency">ظرفیت اتوبوس : </label>
-    <input type="text" name="valency" id="valency">
-    <input type="submit" value="اضافه کردن اتوبوس">
-    <p id="add" style="text-align: center; margin-bottom: 0; margin-top: 10px; padding: 10px; border-style: dashed; border-color:red; display:none">اتوبوس شما به درستی افزوده شد</p>
-    <p id="not-add" style="text-align: center; margin-bottom: 0; margin-top: 10px; padding: 10px; border-style: dashed; border-color:red; display:none">اتوبوس متاسفانه افزوده نشد !</p>
-    <script>
-        var searchIndex1 = window.location.href.indexOf("true");
-        var searchIndex2 = window.location.href.indexOf("false");
-        if(searchIndex1 > -1){
-            document.getElementById('add').style.display='block';
-        }else if(searchIndex2 > -1){
-            document.getElementById('not-add').style.display='block';
-        }
-    </script>
-</form>
+<body class="container-fluid bg-light">
+<div class="row position-static">
+    <div class="col-12" style="padding: 0">
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            <a class="navbar-brand h1 text-white" href="../../main-pages/index.html">سیستم رزرو بلیت اتوبوس</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link text-white" href="admin-page.html">منوی مدیریت</a>
+                    <a class="nav-item nav-link text-white" href="add-cities.html">افزودن شهر</a>
+                    <a class="nav-item nav-link text-white" href="add-bus.html">افزودن اتوبوس</a>
+                    <a class="nav-item nav-link text-white" href="add-travel.jsp">افزودن سفر</a>
+                </div>
+            </div>
+            <form class="form-inline" action="/logout" method="get">
+                <input class="btn btn-outline-warning my-2 my-sm-0" type="submit" value="خارج شدن">
+            </form>
+        </nav>
+    </div>
+</div>
+<div class="row justify-content-center p-4">
+    <div class="col-8">
+        <h2>اضافه کردن اتوبوس به سیستم</h2>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-8 border p-4 m-4">
+        <form action="/add-bus" method="get">
+            <div class="form-group">
+            <label for="bus-number">شماره اتوبوس : </label>
+            <input class="form-control" type="text" name="bus-number" id="bus-number">
+            </div>
+                <div class="form-group">
+            <label for="valency">ظرفیت اتوبوس : </label>
+            <input class="form-control" type="text" name="valency" id="valency">
+                </div>
+            <input class="btn btn-dark" type="submit" value="اضافه کردن اتوبوس">
+        </form>
+        <div id="not-add" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none">
+            <strong>متاسفیم!</strong> اتوبوس متاسفانه افزوده نشد !
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div id="add" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none">
+            <strong>ایول!</strong> اتوبوس شما به درستی افزوده شد
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row bg-secondary justify-content-between align-items-center" style="height: 65px">
+    <div class="col-4 text-center">this is a fullstack project</div>
+    <div class="col-4 text-center" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">design
+        and coding by : sajjad rabiee
+        <br>
+        rabiee.614@gmail.com
+    </div>
+    <div class="col-4 text-center">nov 2020</div>
+</div>
+<script>
+    var searchIndex1 = window.location.href.indexOf("true");
+    var searchIndex2 = window.location.href.indexOf("false");
+    if (searchIndex1 > -1) {
+        document.getElementById('add').style.display = 'flex';
+    } else if (searchIndex2 > -1) {
+        document.getElementById('not-add').style.display = 'flex';
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"
+        integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k"
+        crossorigin="anonymous"></script>
+
 </body>
 </html>

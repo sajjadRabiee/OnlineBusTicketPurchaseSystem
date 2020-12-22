@@ -14,7 +14,8 @@ import java.io.IOException;
 public class AddCityServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = WrapFarsi.getFarsiString(req, "name");
+        WrapFarsi wrapFarsi = new WrapFarsi();
+        String name = wrapFarsi.getFarsiString(req, "name");
         CityService cityService = new CityService();
         if(cityService.addCity(name)){
             resp.sendRedirect("/dashboard/admin/add-cities.html?true");

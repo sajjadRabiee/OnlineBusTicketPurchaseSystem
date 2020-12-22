@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html dir="rtl" lang="fa">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
+          integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
+    <title>User Page</title>
 </head>
-<body>
+<body class="container-fluid">
 
+<div class="row position-static">
+    <div class="col-12" style="padding: 0">
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            <a class="navbar-brand h1 text-white" href="../../main-pages/index.html">سیستم رزرو بلیت اتوبوس</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link text-white" href="user-page.html">منوی کاربری</a>
+                    <a class="nav-item nav-link text-white" href="user-tickets.jsp">مشاهده بلیط های من</a>
+                    <a class="nav-item nav-link text-white" href="../../main-pages/search-ticket.jsp">رزرو بلیت</a>
+                </div>
+            </div>
+            <form class="form-inline" action="/logout" method="get">
+                <input class="btn btn-outline-warning my-2 my-sm-0" type="submit" value="خارج شدن">
+            </form>
+        </nav>
+    </div>
+</div>
+<div class="row justify-content-center p-4">
+    <div class="col-12">
+        <h2>منوی کاربر</h2>
+    </div>
+</div>
+<div class="row justify-content-around p-2 m-1">
+    <div class="col-4">
+        <div class="card-body border border-primary">
+            <p class="card-text">در این بخش می توانید بلیت ها را مشاهده و به دلخواه انتخاب کنید</p>
+            <a class="btn btn-info" href="../../main-pages/search-ticket.jsp">پیدا کردن و خرید بلیت</a>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card-body border border-primary">
+            <p class="card-text">در این بخش بلیت های رزور شده را می توانید ببنید</p>
+            <a class="btn btn-info" href="user-tickets.jsp">مشاهده بلیط های من</a>
+        </div>
+    </div>
+</div>
+
+<div class="row bg-secondary justify-content-between align-items-center fixed-bottom" style="height: 65px">
+    <div class="col-4 text-center">this is a fullstack project</div>
+    <div class="col-4 text-center" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">design and coding by : sajjad rabiee
+    <br>
+        rabiee.614@gmail.com
+    </div>
+    <div class="col-4 text-center">nov 2020</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"
+        integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k"
+        crossorigin="anonymous"></script>
 </body>
 </html>

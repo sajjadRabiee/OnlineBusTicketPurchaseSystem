@@ -32,7 +32,7 @@ public class LoginFilter implements Filter {
             httpSession.setAttribute("online_user",user);
             filterChain.doFilter(req,resp);
         }else{
-            resp.sendRedirect("/main-pages/login.html");
+            resp.sendRedirect("/main-pages/login.html?false");
         }
     }
 

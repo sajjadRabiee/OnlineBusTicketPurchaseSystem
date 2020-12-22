@@ -1,13 +1,10 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html dir="rtl" lang="fa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>First Page</title>
 </head>
 <body>
-
-<script src="main.js"></script>
+<a href="main-pages/index.html">وارد شدن به سایت</a>
 </body>
 </html>

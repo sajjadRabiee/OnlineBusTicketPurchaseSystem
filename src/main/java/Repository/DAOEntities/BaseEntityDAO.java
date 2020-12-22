@@ -1,6 +1,7 @@
 package Repository.DAOEntities;
 
 import Repository.EntityManagerFactory.EMF;
+import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -8,6 +9,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,62 +65,81 @@ public abstract class BaseEntityDAO<Entity, ID extends Number> {
     // all
     public List<Entity> findAll(){
         EntityManager em = EMF.getEntityManagerFactory().createEntityManager();
-        TypedQuery<Entity> query = em.createQuery("select e from "+entityClass.getName()+" e",entityClass);
-        List<Entity> objects = query.getResultList();
+        EntityTransaction transaction = em.getTransaction();
+        List<Entity> objects;
+        try {
+            transaction.begin();
+            TypedQuery<Entity> query = em.createQuery("select e from "+entityClass.getName()+" e",entityClass);
+            objects = query.getResultList();
+            transaction.commit();
+        }catch (Exception e){
+            objects = new ArrayList<Entity>();
+            transaction.rollback();
+            System.out.println(e);
+        }
+
         return objects;
     }
     //add
     public boolean add(Entity entity) {
         EntityManager em = EMF.getEntityManagerFactory().createEntityManager();
         EntityTransaction transaction = em.getTransaction();
+        boolean bool = false;
         try {
             transaction.begin();
             em.persist(entity);
             transaction.commit();
-            return true;
+            bool = true;
         } catch (Exception e) {
             transaction.rollback();
             System.out.println(e);
-            return false;
+            bool = false;
         } finally {
             em.close();
         }
+        return bool;
     }
 
     //update
     public boolean update(Entity entity) {
         EntityManager em = EMF.getEntityManagerFactory().createEntityManager();
         EntityTransaction transaction = em.getTransaction();
+        boolean bool = false;
         try {
             transaction.begin();
             em.merge(entity);
             transaction.commit();
-            return true;
+            bool = true;
         } catch (Exception e) {
             transaction.rollback();
             System.out.println(e);
-            return false;
+            bool = false;
         } finally {
             em.close();
         }
+        return bool;
     }
 
     //delete
     public boolean delete(Entity entity) {
         EntityManager em = EMF.getEntityManagerFactory().createEntityManager();
+        //Session session = em.unwrap(Session.class);
         EntityTransaction transaction = em.getTransaction();
+        boolean bool = false;
         try {
             transaction.begin();
-            em.remove(entity);
+            em.remove(em.contains(entity) ? entity : em.merge(entity));
+            //session.delete();
             transaction.commit();
-            return true;
+            bool = true;
         } catch (Exception e) {
             transaction.rollback();
             System.out.println(e);
-            return false;
+            bool = false;
         } finally {
             em.close();
         }
+        return bool;
     }
 }
 
